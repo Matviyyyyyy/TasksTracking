@@ -6,4 +6,6 @@
 <h5>Priority - {{ task.priority }}</h5>
 <p>{{ task.description }}</p>
 <h6>{{ task.due_date }}</h6>
+<a href="{% url 'tasks:update-task' task.id %}" class="btn btn-warning">Редагувати</a>
+<a href="{% url 'tasks:delete-task' task.id %}" class="btn btn-danger">Видалити</a>
 {% endblock %}

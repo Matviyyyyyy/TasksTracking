@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br>
+<form method="get" class="form-inline mb-3">
+    {{ form.status.label_tag }}
+    {{ form.status }}
+    <br>
+    {{ form.priority.label_tag }}
+    {{ form.priority }}
+    <button type="submit" class="btn btn-primary ml-2">Фільтрувати</button>
+</form>
+<br>
 <ul>
     {% for task in tasks %}
     <li><a href = "{% url 'tasks:task-detail' task.id %}">{{ task.name }}</a> - {{ task.status }}</li>
