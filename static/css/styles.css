@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+
+
+.nav-shadow{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    height: 55px;
+    text-align: left;
+    vertical-align: center;
+}
+
+.a-nav{
+    font: 600 18px 'Source Sans Pro', sans-serif;
+    text-decoration: none;
+    color: #919191;
+    padding: 0;
+}
+
+.a-nav:hover{
+    text-decoration: none;
+
+}
+
+.a-nav-log-out{
+    background-color: transparent;
+    font: 600 18px 'Source Sans Pro', sans-serif;
+    color: #919191;
+    padding: 0;
+    border: 1px solid white;
+}
+.a-nav-log-out:hover{
+    color: #3b5e96;
+}
+
+.img-icon-nav{
+    width: 50px;
+    height:auto;
+    text-align: center;
+    margin-left: 5px;
+}
+.a-nav-user{
+    font-size: 20px;
+    font: 600 18px 'Source Sans Pro', sans-serif;
+    text-decoration: none;
+    color: #919191;
+    padding: 0;
+    text-align:right;
+
+}
+.a-nav-user:hover{
+    text-decoration: none;
+}
+
+.main-background {
+    padding: 30px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 40px;
+}
+
+.div-user-subscribes{
+    padding: 20px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 40px;
+    max-width: 50%;
+}
+
+.task-card{
+    max-width: 100%;
+    height: 150px;
+    padding: 7px;
+    position: relative;
+
+}
+
+.img-task-priority{
+    width: 25px;
+    height: auto;
+}
+
+.task-name{
+    font: 600 25px 'Source Sans Pro', sans-serif;
+    padding: 0;
+    text-align:left;
+    margin: 0;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-done{
+    position: absolute;
+    bottom: 10px; /* Відстань від нижнього краю */
+    right: 10px;
+}
+.due-date-task{
+    position: absolute;
+    bottom: 5px; /* Відстань від нижнього краю */
+    right: 120px;
+}
+.filters{
+    margin-left: 700px;
+}
+.task-card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.a-task{
+    text-decoration: none;
+    color: black;
+}
+.a-task:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.task-name-detail{
+    text-align: center;
+    font: 600 'Source Sans Pro', sans-serif;
+    white-space: wrap;
+}
+.imgs-priority-status{
+    text-align: right;
+}
+
+.desc-detail-div{
+    background-color: #fcfccf;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.desc-detail{
+    font: 600 20px 'Source Sans Pro', sans-serif;
+}
+
+.comments-div{
+    height: 500px;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 20px;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+.card-comment{
+    border: 2px solid black;
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 7px;
+}
+
+.a-comment-user-name{
+    font: 600 20px 'Source Sans Pro', sans-serif;
+    text-decoration: none;
+    color: black;
+}
+.a-comment-user-name:hover{
+    text-decoration: none;
+    color: black;
+}
+
+
+.img-comment{
+    max-width:100%;
+    height:auto;
+    border-radius: 15px;
+}
+
+.time-comment{
+    text-align:left;
+    font-size: 15px;
+
+}
+.btn-like{
+    background-color: transparent;
+    border: 1px solid white;
+    margin-left: 50px;
+}
+
+
+.button_add{
+    font-size: 30px;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background-color: #bdcdff;
+    border: 2px solid white;
+    text-align: center;
+    vertical-align:center;
+}
+
+.button_add:hover{
+    background-color: #90abfc;
+}
+
+.button_hide_add{
+    font-size: 30px;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background-color: #ffc7c7;
+    border: 2px solid white;
+    text-align: center;
+    vertical-align:center;
+}
+
+.button_hide_add:hover{
+    background-color: #fc9099;
+}
+.btn-adding{
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    font: 600 20px 'Source Sans Pro', sans-serif;
+}
+
+.user-page-image{
+    max-width: 100%;
+    height: auto;
+}
+.user-name{
+    font: 600 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+.user-dani{
+    text-align: center;
+    font: 600 'Source Sans Pro', sans-serif;
+}
+.user-dani-a{
+    text-align: center;
+    font: 600 'Source Sans Pro', sans-serif;
+    text-decoration:none;
+    color: black;
+}
+.user-dani-a:hover{
+    text-decoration:none;
+    color: black;
+}
+
+.btn-subscribe{
+    width: 300px;
+    height: 40px;
+
+}
+
+
+.btn-update-user{
+    width: 300px;
+    height: 40px;
+}
+
+.btn-log-in{
+    width: 200px;
+    height: 40px;
+    font: 600 20px 'Source Sans Pro', sans-serif;
+}
+
+.btn-register{
+    width: 200px;
+    height: 40px;
+    font: 600 20px 'Source Sans Pro', sans-serif;
+}
+.img-search{
+    height: 35px;
+    width: auto;
+
+}
+.btn-search{
+    background-color:transparent;
+    border: 1px solid white;
+}
+
+
+
+
+

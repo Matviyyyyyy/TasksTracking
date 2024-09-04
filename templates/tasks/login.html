@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="main-background">
+            <h2 style="text-align: center; font: 600 'Source Sans Pro', sans-serif; ">Log in</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-primary btn-log-in">Login</button>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}

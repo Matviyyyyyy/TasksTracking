@@ -1,11 +1,178 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>{{ task.name }}</h3>
-<h5>Status - {{ task.status }}</h5>
-<h5>Priority - {{ task.priority }}</h5>
-<p>{{ task.description }}</p>
-<h6>{{ task.due_date }}</h6>
-<a href="{% url 'tasks:update-task' task.id %}" class="btn btn-warning">Редагувати</a>
-<a href="{% url 'tasks:delete-task' task.id %}" class="btn btn-danger">Видалити</a>
+{% load custom_tags %}
+{% load static %}
+<div class = "row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <br>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="main-background">
+                        <h1 class="task-name-detail" >{{ task.name }}</h1>
+                        <div class="imgs-priority-status">
+                            {% if task.priority == "high" %}
+                                <img src="{% static './images/task-list/high-priority.png' %}" class="img-task-priority">
+                            {% elif task.priority == "medium" %}
+                                <img src="{% static './images/task-list/medium-priority.png' %}"  class="img-task-priority">
+                            {% elif task.priority == "low" %}
+                                <img src="{% static './images/task-list/low-priority.png' %}" class="img-task-priority">
+                            {%endif%}
+                            {% if task.status == "done" %}
+                                <img src="{% static './images/task-list/status-done.png' %}" class="img-task-priority">
+                            {% elif task.status == "in_progress" %}
+                                <img src="{% static './images/task-list/status-inprogress.png' %}" class="img-task-priority">
+                            {% elif task.status == "todo" %}
+                                <img src="{% static './images/task-list/status-todo.png' %}" class="img-task-priority">
+                            {%endif%}
+                        </div>
+                        <div class="desc-detail-div">
+                            <p class="desc-detail">{{ task.description }}</p>
+                        </div>
+                        <br>
+                        <h6>{{ task.due_date }}</h6>
+                        {% if request.user == task.user %}
+                            <a href="{% url 'tasks:update-task' task.id %}" class="btn btn-warning">Редагувати</a>
+                            <a href="{% url 'tasks:delete-task' task.id %}" class="btn btn-danger">Видалити</a>
+                        {% endif %}
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="main-background">
+                    <div class="comments-div " tabindex="0">
+                        <div id="form-add-comment" style="display:none">
+                        <div class="card card-comment">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <a class="a-comment-user-name" href = "#"><img src="{% static './images/task-detail/user.png' %}" class="img-task-priority"> {{ request.user.first_name }} {{ request.user.last_name }}</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <div style="text-align: right;">
+                                        <a><img src="{% static './images/task-detail/edit-comment.png' %}" class="img-task-priority"></a>
+                                        <a><img src="{% static './images/task-detail/delete-comment.png' %}" class="img-task-priority"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <form action="{% url 'tasks:task-detail' task.id %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <p style="font: 600 'Source Sans Pro', sans-serif;">{{ comment_form.text }}</p>
+                                <hr>
+                                <div class="comment-media">
+                                    {{ comment_form.media }}
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <button type="submit" class="btn btn-primary btn-adding">Add</button>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                            </form>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6 class="time-comment">Date</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <form>
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-like">
+                                            <img src="{% static './images/task-detail/like.png' %}" class="img-task-priority">0
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        </div>
+                    {% for comment in comments %}
+                        <div class="card card-comment">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <a class="a-comment-user-name" href = "{% url 'tasks:user-page' comment.user.pk %}"><img src="{% static './images/task-detail/user.png' %}" class="img-task-priority"> {{ comment.user.first_name }} {{ comment.user.last_name }}</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <div style="text-align: right;">
+                                        {% if request.user == comment.user %}
+                                            <a href="{% url 'tasks:update-comment' comment.id %}"><img src="{% static './images/task-detail/edit-comment.png' %}" class="img-task-priority"></a>
+                                            <a href="{% url 'tasks:delete-comment' comment.id %}"><img src="{% static './images/task-detail/delete-comment.png' %}" class="img-task-priority"></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <p style="font: 600 'Source Sans Pro', sans-serif;">{{ comment.text }}</p>
+                            <hr>
+                            {% if comment.media %}
+                                <div class="comment-media">
+                                    {% if comment.media.url|endswith:".jpg" or comment.media.url|endswith:".png" or comment.media.url|endswith:".jpeg" or comment.media.url|endswith:".webp" %}
+                                        <img src="{{ comment.media.url }}" alt="Зображення коментаря" class="img-comment">
+                                    {% elif comment.media.url|endswith:".mp4" %}
+                                        <video class="img-comment" controls>
+                                            <source src="{{ comment.media.url }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    {% else %}
+                                        <a href="{{ comment.media.url }}">Завантажити файл</a>
+                                    {% endif %}
+                                </div>
+                            <hr>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6 class="time-comment">{{ comment.published_date }}</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <form action="{% url 'tasks:comment-like-toggle' comment.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-like">
+                                            <img src="{% static './images/task-detail/like.png' %}" class="img-task-priority">{{ comment.likes.count }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                    {% endfor %}
+                    </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-4">
+                            <button class = "button_add" onclick="show_add_comment()">+</button>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+            </div>
+        <br>
+        <div class="row">
+            <div class = "col-md-5"></div>
+            <div class = "col-md-2">
+
+            </div>
+            <div class = "col-md-5"></div>
+        </div>
+        <br>
+                <br>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <button class="button_hide_add" onclick="hide_add_comment()">×</button>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
 {% endblock %}

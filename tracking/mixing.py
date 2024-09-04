@@ -4,5 +4,12 @@ class UserIsOwnerMixin(object):
     def dispatch(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance.user != self.request.user:
-            raise PermissionDenied
+            raise PermissionDenied()
+        return super().dispatch(request, *args, **kwargs)
+
+class UserIsHisProfileMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance != self.request.user:
+            raise PermissionDenied()
         return super().dispatch(request, *args, **kwargs)

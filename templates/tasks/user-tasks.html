@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <br>
+        {% for task in user_tasks %}
+            <div class="main-background">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class="a-comment-user-name" href = "{% url 'tasks:task-detail' task.pk %}" style="font-size: 24px">{{ task.name }}</a>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="imgs-priority-status">
+                            {% if task.priority == "high" %}
+                                <img src="{% static './images/task-list/high-priority.png' %}" class="img-task-priority">
+                            {% elif task.priority == "medium" %}
+                                <img src="{% static './images/task-list/medium-priority.png' %}"  class="img-task-priority">
+                            {% elif task.priority == "low" %}
+                                <img src="{% static './images/task-list/low-priority.png' %}" class="img-task-priority">
+                            {%endif%}
+                            {% if task.status == "done" %}
+                                <img src="{% static './images/task-list/status-done.png' %}" class="img-task-priority">
+                            {% elif task.status == "in_progress" %}
+                                <img src="{% static './images/task-list/status-inprogress.png' %}" class="img-task-priority">
+                            {% elif task.status == "todo" %}
+                                <img src="{% static './images/task-list/status-todo.png' %}" class="img-task-priority">
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        <br>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}

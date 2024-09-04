@@ -1,14 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="container mt-3">
-    <h2>{{ view.title }}</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Зберегти</button>
-    </form>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <br>
+        <div class="main-background">
+            <div class="container mt-3">
+                <h2 style="font: 600 'Source Sans Pro', sans-serif; text-align:center;">Add task</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-success btn-log-in">Save</button>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="col-md-3"></div>
 </div>
 
 {% endblock %}

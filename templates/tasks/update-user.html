@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <br>
+        <div class="main-background">
+            <div class="container mt-3">
+                <h2 style="text-align:center; font: 600 'Source Sans Pro', sans-serif;">Edit user</h2>
+                <div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-warning" >Edit</button>
+                        <a href="{% url 'tasks:user-page' user.pk %}" class="btn btn-secondary">Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}

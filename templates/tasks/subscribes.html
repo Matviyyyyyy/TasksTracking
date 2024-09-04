@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <br>
+        {% for subscribe in subscribes %}
+            <div class="main-background">
+                <a class="a-comment-user-name" href = "{% url 'tasks:user-page' subscribe.subscriber.pk %}"><img src="{% static './images/task-detail/user.png' %}" class="img-task-priority"> {{ subscribe.subscriber.first_name }} {{ subscribe.subscriber.last_name }}</a>
+            </div>
+            <br>
+        {% endfor %}
+        <br>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+{% endblock %}

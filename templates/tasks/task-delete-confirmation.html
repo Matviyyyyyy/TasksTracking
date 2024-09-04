@@ -4,7 +4,7 @@
 
 <div class="container">
     <h2>Видалення завдання</h2>
-    <p>Ви впевнені, що хочете видалити завдання "{{ task.title }}"</p>
+    <p>Ви впевнені, що хочете видалити завдання "{{ task.name }}"</p>
     <form method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Так, видалити</button>

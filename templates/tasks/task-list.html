@@ -1,19 +1,79 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <br>
+        <div class="main-background">
+            <br>
+            <div class="row">
+                <div class="col-md-7">
+                    <form method="get" class="form-inline mb-3">
+                        {{ task_search_form.name }}
+                        <button type="submit" class="btn-search"><img src="{% static './images/task-list/search-icon.png' %}" class="img-search"></button>
+                    </form>
+                </div>
+                <div class="col-md-5">
+                    <form method="get" class="form-inline mb-3">
+                        {{ task_filter_form.status.label_tag }}
+                        {{ task_filter_form.status }}
+                        <br>
+                        {{ task_filter_form.priority.label_tag }}
+                        {{ task_filter_form.priority }}
+                        <button type="submit" class="btn btn-primary ml-2">Фільтрувати</button>
+                    </form>
+                </div>
+            </div>
 <br>
-<form method="get" class="form-inline mb-3">
-    {{ form.status.label_tag }}
-    {{ form.status }}
-    <br>
-    {{ form.priority.label_tag }}
-    {{ form.priority }}
-    <button type="submit" class="btn btn-primary ml-2">Фільтрувати</button>
-</form>
-<br>
-<ul>
-    {% for task in tasks %}
-    <li><a href = "{% url 'tasks:task-detail' task.id %}">{{ task.name }}</a> - {{ task.status }}</li>
-    {% endfor %}
-</ul>
+    <div class="container">
+        <div class="row">
+            {% for task in tasks %}
+            <div class="col-md-3">
+                <a href = "{% url 'tasks:task-detail' task.id %}" class="a-task">
+                <div class="card task-card">
+                    <div class="row">
+                        <div class = "col-md-8">
+                            <!--<h4><a href = "{% url 'tasks:task-detail' task.id %}">{{ task.name }}</h4>-->
+                            <h5 class="task-name">{{ task.name }}</h5>
+                        </div>
+                        <div class = "col-md-4">
+                            <div class="icons-task-h5">
+                                {% if task.priority == "high" %}
+                                    <img src="{% static './images/task-list/high-priority.png' %}" class="img-task-priority">
+                                {% elif task.priority == "medium" %}
+                                    <img src="{% static './images/task-list/medium-priority.png' %}"  class="img-task-priority">
+                                {% elif task.priority == "low" %}
+                                    <img src="{% static './images/task-list/low-priority.png' %}" class="img-task-priority">
+                                {%endif%}
+                                {% if task.status == "done" %}
+                                    <img src="{% static './images/task-list/status-done.png' %}" class="img-task-priority">
+                                {% elif task.status == "in_progress" %}
+                                    <img src="{% static './images/task-list/status-inprogress.png' %}" class="img-task-priority">
+                                {% elif task.status == "todo" %}
+                                    <img src="{% static './images/task-list/status-todo.png' %}" class="img-task-priority">
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="due-date-task">
+                        <img src="{% static './images/task-list/time.png' %}" class="img-task-priority"> {{ task.due_date }}
+                    </h6>
+                    <form action="{% url 'tasks:task-complete' task.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning btn-sm btn-done">Done</button>
+                    </form>
+                </div>
+                </a>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+        </div>
+        <br>
+    </div>
+    <div class="col-md-1"></div>
+</div>
 {% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="main-background">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="user-name">{{ user.first_name }} {{ user.last_name }}</h1>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="user-dani">{{ user.tasks.count }}</h5>
+                            <h5 style="text-align:center;"><a href = "{% url 'tasks:user-tasks' user.pk %}" class="user-dani-a">Tasks</a></h5>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="user-dani">{{ user.subscribes.count }}</h5>
+                            <h5 style="text-align:center;"> <a href="{% url 'tasks:user-subscribers' user.pk %}" class="user-dani-a" >Subscribes</a></h5>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="user-dani">{{ user.subscribes_to.count }}</h5>
+                            <h5 style="text-align:center;"><a href="{% url 'tasks:user-subscribers-to' user.pk %}" class="user-dani-a">Subscribe to</a></h5>
+                        </div>
+                    </div>
+                    <br>
+                    {% if request.user != user %}
+                        <form action="{% url 'tasks:subscribe' user.pk %}" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary btn-subscribe">
+                                        Subscribe
+                                    </button>
+                                </div>
+                                <div class="col-md-5"></div>
+                            </div>
+                        </form>
+                    {% endif %}
+                    <hr>
+                    {% if request.user == user %}
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-4">
+                                <a href="{% url 'tasks:update-user' user.pk %}" class="btn btn-warning btn-update-user">Edit</a>
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static './images/task-detail/user.png' %}" class="user-page-image" >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}
